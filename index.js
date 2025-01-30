@@ -1,36 +1,68 @@
-function sleep (timeout) {
-  return new Promise ((resolve,reject) => {
-   if(timeout < 0) {
-       reject("timeout cannot be a negative");
-   } else if (timeout > 365 * 24 * 3600000) {
-       reject("a promise for time greater than one year may not be provided")
-   } else {
-       setTimeout(() => resolve(), timeout)
-   }
-   
-  }) 
-      
-   }
-    const timeout = 1000;
-   // const promise = sleep(timeout);
-   // promise.then(() => console.log(`${timeout} has passed`));
-   // console.log(`waiting for ${timeout}`)
-   // sleep(timeout).then(() =>console.log(`${timeout} has passed`) )
-   // .catch(er => console.log(er)).finally(() => console.log("finally"));
-   function initialNumber() {
-       return 1;
-   }
-   function sum(num, factor) {
-       return num + (factor ?? 1);
-   }
-   function displayNum(num){
-       if(num > 3) {
-           throw "The number cannot be greater than 3";
-       }
-       console.log(num);
-   }
-   let res = sleep(timeout).then(() => initialNumber()).then(num => sum(num)).then(num => sum(num))
-   .then(num => sum(num, -1))
-   .then(num => displayNum(num)).catch(er => console.log(er));
-   console.log("kukureku");
-   console.log(1 + res); //"1[object Promise]"
+// 1.
+function sayHi() {
+    console.log(name);
+    console.log(age);
+    var name = "Lydia";
+    let age = 21;
+  }
+  sayHi();
+  
+//   D: undefined and ReferenceError
+
+// 2.
+for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 1);
+  }
+  
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 1);
+  }
+
+//   C: 3 3 3 and 0 1 2
+
+// 3.
++true;
+!"Lydia";
+
+// A: 1 and false
+
+
+// 4.	What's the output?
+const shape = {
+  radius: 10,
+  diameter() {
+    return this.radius * 2;
+  },
+  perimeter: () => 2 * Math.PI * this.radius
+};
+
+console.log(shape.diameter());
+console.log(shape.perimeter());
+
+
+// B: 20 and NaN
+
+
+// 5.	Which one is true?
+const bird = {
+  size: "small"
+};
+
+const mouse = {
+  name: "Mickey",
+  small: true
+};
+// A: mouse.bird.size is not valid 
+// B: mouse[bird.size] is not valid
+// C: mouse[bird["size"]] is not valid
+// D: All of them are valid
+
+
+
+let c = { greeting: "Hey!" };
+let d;
+
+d = c;
+c.greeting = "Hello";
+console.log(d.greeting);
+// A: Hello
